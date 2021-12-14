@@ -1,0 +1,66 @@
+form {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    font-size: 30px;
+    text-align: center;
+}
+
+.flex-item {
+    padding: 10px;
+    margin-right: 20px;
+    flex: 50%;
+}
+
+@media (max-width: 800px) {
+    .flex-container {
+        flex-direction: column;
+    }
+}
+
+.mat-form-field {
+    margin-right: 30px;
+}
+
+table {
+    width: 100%;
+    text-align: center;
+}
+
+.example-container {
+    height: 70vh;
+    overflow: auto;
+}
+
+.edit {
+    margin-right: 10px;
+}
+
+.edit>i {
+    color: #06d6a0;
+}
+
+.delete {
+    margin-right: 10px;
+}
+
+.delete>i {
+    color: #e35e6b;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.mat-card {
+    margin-bottom: 10px;
+}
+
+.not-found {
+    text-align: center;
+}
