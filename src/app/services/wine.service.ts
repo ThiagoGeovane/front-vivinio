@@ -108,9 +108,7 @@ export class WineService {
   }
 
   errorHandler(e: any): Observable<any> {
-    let message = 'Ocorreu um erro!'
-    if (e.error.message) message = e.error.message
-    this.showMessage(message, true)
+    this.showMessage(e.message || 'Ocorreu um error', true)
     return EMPTY
   }
 }

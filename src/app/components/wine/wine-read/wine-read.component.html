@@ -53,6 +53,16 @@
                 <mat-card-title>{{ wine.name }}</mat-card-title>
             </mat-card-header>
 
+            <mat-card-content>
+                <img style="object-fit: cover;" [src]="transformImageUrl(wine?.image_url)" width="200px" height="200px"
+                    onerror="this.src='../../../../assets/img/dump3.png'" [alt]="wine?.name">
+            </mat-card-content>
+
+            <hr>
+            <span class="preco-avista">{{ 10 | currency }} à vista</span> <br>
+            <span class="preco-parcelado">{{ 100 | currency }} parcelado</span>
+
+
             <!-- <mat-card-content class="card-content cursor-pointer" (click)="abrirModalDetalhes(wine)">
                 <div *ngIf="wine.imagens.length === 0; else elseImagens">
                     <img class="card-image" src="../../../assets/img/dump3.png" alt="Dump">

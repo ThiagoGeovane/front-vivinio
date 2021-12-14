@@ -1,3 +1,4 @@
+import { environment } from './../../../../environments/environment';
 import { HeaderService } from './../../template/header/header.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { WineService } from './../../../services/wine.service';
@@ -5,6 +6,8 @@ import { Wine } from './../../../models/wine.model';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
+
+const { apiUrl } = environment;
 
 @Component({
     selector: 'app-wine-read',
@@ -42,6 +45,10 @@ export class WineReadComponent implements OnInit {
             this.filters.map(filter => this._multiFilters(filter.type, filter.attribute, filter.control))
         })
         this.statusTable = true
+    }
+
+    transformImageUrl(imageUrl?: string): string {
+        return imageUrl.slice(0, 4) === 'http' ? imageUrl : `${apiUrl}/${imageUrl}`;
     }
 
     displayTitles(wine: Wine): string {
