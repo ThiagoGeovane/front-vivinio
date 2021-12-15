@@ -1,13 +1,36 @@
-<div class="header-button">
-	<button mat-raised-button>
-		Comentar
-	</button>
+<mat-spinner *ngIf="showSpinner; else notSpinner"></mat-spinner>
+<ng-template #notSpinner>
+	<div class="header-button">
+		<h1><b>{{ wine.name }}</b></h1>
 
-	<button mat-raised-button>
-		<a routerLink="/wines">Voltar</a>
-	</button>
-</div>
+		<button mat-raised-button (click)="voltar()">
+			Voltar
+		</button>
+	</div>
 
-<div class="container-wrapper">
-	Aqui ficam os mais votados
-</div>
+	<!-- <div class="container-wrapper">
+		<h1><b>{{ wine.name }}</b></h1>
+	</div> -->
+
+	<div class="flex-container">
+		<div class="flex-item-first">
+			<img style="object-fit: cover;" [src]="transformImageUrl(wine.image_url)"
+				onerror="this.src='../../../assets/img/dump3.png'" alt="Imagens de produtos">
+		</div>
+		<div class="flex-item-second">
+			<h3><b>Produtor: </b> {{ wine.producer ? wine.producer : '--' }}</h3>
+			<h3><b>País: </b> {{ wine.country ? wine.country : '--' }}</h3>
+			<h3><b>Descrição: </b> {{ wine.description ? wine.description : wine.name }}</h3>
+		</div>
+		<div class="flex-item-terc">
+			<h3><b>Tipo de vinho: </b> {{ wine.type ? wine.type : '--' }}</h3>
+			<h3><b>Tipo de uva: </b> {{ wine.type_grape ? wine.type_grape : '--' }}</h3>
+			<h3><b>Harmonização: </b> {{ wine.harmonizing ? wine.harmonizing : wine.name }}</h3>
+		</div>
+	</div>
+
+	<mat-list *ngFor="let review of wine.reviews">
+		<mat-list-item>{{ review.review }}</mat-list-item>
+		<mat-divider></mat-divider>
+	</mat-list>
+</ng-template>

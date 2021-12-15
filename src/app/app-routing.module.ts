@@ -70,7 +70,7 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: "top/:plataforma",
+    path: "top/:id",
     component: TopRatedComponent
   },
 ];

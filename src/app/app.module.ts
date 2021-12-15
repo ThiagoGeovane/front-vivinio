@@ -29,6 +29,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 //Componentes Criados
 import { HeaderComponent } from './components/template/header/header.component';
@@ -103,6 +104,7 @@ registerLocaleData(localePt);
     MatDividerModule,
     MatProgressBarModule,
     MatTabsModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {

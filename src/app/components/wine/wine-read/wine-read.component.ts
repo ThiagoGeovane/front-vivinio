@@ -21,7 +21,8 @@ export class WineReadComponent implements OnInit {
     filters = [
         { type: 'filteredTitles', attribute: 'title', control: 'pais' }, 
         { type: 'filteredDevelopers', attribute: 'developer', control: 'tipoVinho' },
-        { type:'filteredGenres', attribute: 'genre', control: 'tipoUva' }
+        { type:'filteredGenres', attribute: 'genre', control: 'tipoUva' },
+        { type:'filteredHarmo', attribute: 'harmonizing', control: 'tipoHarmonizacao' }
     ]
     dataSource: any
     statusTable: boolean
@@ -29,13 +30,17 @@ export class WineReadComponent implements OnInit {
     pais = new FormControl();
     tipoVinho = new FormControl();
     tipoUva = new FormControl();
+    tipoHarmonizacao = new FormControl();
 
     filteredDevelopers: any;
     filteredTitles: any;
     filteredGenres: any;
+    filteredHarmo: any;
     newFilters = []
 
     isLogged = false;
+
+    showSpinner = false;
 
     constructor(
         private wineService: WineService, 
@@ -44,11 +49,12 @@ export class WineReadComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+        this.showSpinner = true;
         this.isLogged = window.localStorage.getItem('token') ? true : false;
 
         this.wineService.read().subscribe(wines => {
             this.wines = wines
-            console.log(this.wines)
+            this.showSpinner = false
             this.filters.map(filter => this._multiFilters(filter.type, filter.attribute, filter.control))
         })
         this.statusTable = true
@@ -68,6 +74,10 @@ export class WineReadComponent implements OnInit {
     
     displayUva(wine: Wine): string {
         return wine && wine.type_grape ? wine.type_grape : '';
+    }
+
+    displayHarmonizacao(wine: Wine): string {
+        return wine && wine.harmonizing ? wine.harmonizing : '';
     }
 
     private _filter(name: any, attribute: string): Wine[] {
