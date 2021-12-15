@@ -23,9 +23,6 @@ export class WineCreateComponent implements OnInit {
 
     imgBase64Path: string
 
-    types = ['pc', 'xbox', 'switch', 'playstation']
-    genres = ['Ação', 'Aventura', 'Estratégia', 'RPG', 'Esporte', 'Simulação']
-
     @ViewChild("fileUpload", { static: false }) fileUpload: ElementRef; files = [];
 
     constructor(

@@ -4,40 +4,38 @@
     <form>
 
         <mat-form-field class="example-full-width">
-            <mat-label>Título</mat-label>
-            <input type="text" placeholder="Ex. Uncharted" matInput [formControl]="titlesControl"
-                [matAutocomplete]="autoTitle" (input)="applyFilter($event.target.value)"
-                (keyup.enter)="applyFilter($event.target.value)">
-            <mat-autocomplete #autoTitle="matAutocomplete" [displayWith]="displayTitles">
+            <mat-label>País</mat-label>
+            <input type="text" placeholder="Ex. Uncharted" matInput [formControl]="pais" [matAutocomplete]="autoPais"
+                (input)="applyFilter($event.target.value)" (keyup.enter)="applyFilter($event.target.value)">
+            <mat-autocomplete #autoPais="matAutocomplete" [displayWith]="displayPais">
                 <mat-option *ngFor="let wine of filteredTitles | async" [value]="wine"
                     (click)="applyFilter($event.target.innerText)">
-                    {{wine.title}}
+                    {{wine.country}}
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <mat-label>Desenvolvedor</mat-label>
-            <input type="text" placeholder="Ex. Naughty Dog" matInput [formControl]="developersControl"
-                [matAutocomplete]="autoDeveloper" (input)="applyFilter($event.target.value)"
+            <mat-label>Tipo do vinho</mat-label>
+            <input type="text" placeholder="Ex. Naughty Dog" matInput [formControl]="tipoVinho"
+                [matAutocomplete]="autoVinho" (input)="applyFilter($event.target.value)"
                 (keyup.enter)="applyFilter($event.target.value)">
-            <mat-autocomplete #autoDeveloper="matAutocomplete" [displayWith]="displayDevelopers">
+            <mat-autocomplete #autoVinho="matAutocomplete" [displayWith]="displayVinho">
                 <mat-option *ngFor="let wine of filteredDevelopers | async" [value]="wine"
                     (click)="applyFilter($event.target.innerText)">
-                    {{ wine.developer }}
+                    {{ wine.type }}
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
-            <mat-label>Gênero</mat-label>
-            <input type="text" placeholder="Ex. Ação" matInput [formControl]="genresControl"
-                [matAutocomplete]="autoGenre" (input)="applyFilter($event.target.value)"
-                (keyup.enter)="applyFilter($event.target.value)">
-            <mat-autocomplete #autoGenre="matAutocomplete" [displayWith]="displayGenres">
+            <mat-label>Tipo da uva</mat-label>
+            <input type="text" placeholder="Ex. Ação" matInput [formControl]="tipoUva" [matAutocomplete]="autoUva"
+                (input)="applyFilter($event.target.value)" (keyup.enter)="applyFilter($event.target.value)">
+            <mat-autocomplete #autoUva="matAutocomplete" [displayWith]="displayUva">
                 <mat-option *ngFor="let wine of filteredGenres | async" [value]="wine"
                     (click)="applyFilter($event.target.innerText)">
-                    {{ wine.genre }}
+                    {{ wine.type_grape }}
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>

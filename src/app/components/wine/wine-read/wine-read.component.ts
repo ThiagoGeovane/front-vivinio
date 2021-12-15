@@ -17,53 +17,47 @@ const { apiUrl } = environment;
 export class WineReadComponent implements OnInit {
 
     wines: Wine[] = []
-    displayedColumns = ['imgPath', 'title', 'summary', 'developer', 'type', 'genre', 'rating', 'action'];
     filters = [
-        { type: 'filteredTitles', attribute: 'title', control: 'titlesControl' }, 
-        { type: 'filteredDevelopers', attribute: 'developer', control: 'developersControl' },
-        { type:'filteredGenres', attribute: 'genre', control: 'genresControl' }
+        { type: 'filteredTitles', attribute: 'title', control: 'pais' }, 
+        { type: 'filteredDevelopers', attribute: 'developer', control: 'tipoVinho' },
+        { type:'filteredGenres', attribute: 'genre', control: 'tipoUva' }
     ]
     dataSource: any
     statusTable: boolean
 
-    titlesControl = new FormControl();
-    developersControl = new FormControl();
-    genresControl = new FormControl();
+    pais = new FormControl();
+    tipoVinho = new FormControl();
+    tipoUva = new FormControl();
 
     filteredDevelopers: any;
     filteredTitles: any;
     filteredGenres: any;
     newFilters = []
 
-    showSpinner = false
-
     constructor(private wineService: WineService, private headerService: HeaderService) { }
 
     ngOnInit(): void {
-        this.showSpinner = true
-        if (this.username == null) this.displayedColumns.pop()
         this.wineService.read().subscribe(wines => {
             this.wines = wines
             console.log(this.wines)
-            this.showSpinner = false
-            // this.filters.map(filter => this._multiFilters(filter.type, filter.attribute, filter.control))
+            this.filters.map(filter => this._multiFilters(filter.type, filter.attribute, filter.control))
         })
-        // this.statusTable = true
+        this.statusTable = true
     }
 
     transformImageUrl(imageUrl?: string): string {
         return imageUrl.slice(0, 4) === 'http' ? imageUrl : `${apiUrl}/${imageUrl}`;
     }
 
-    displayTitles(wine: Wine): string {
+    displayPais(wine: Wine): string {
         return wine && wine.country ? wine.country : '';
     }
 
-    displayDevelopers(wine: Wine): string {
+    displayVinho(wine: Wine): string {
         return wine && wine.type ? wine.type : '';
     }
     
-    displayGenres(wine: Wine): string {
+    displayUva(wine: Wine): string {
         return wine && wine.type_grape ? wine.type_grape : '';
     }
 
@@ -103,13 +97,5 @@ export class WineReadComponent implements OnInit {
 
     openDialog(event: string) {
         this.wineService.openDialog(event)
-    }
-
-    dialogEditar(wine: Wine): void {
-        console.log('Editar ',wine)
-    }
-
-    dialogExcluir(wine: Wine): void {
-        console.log('Excluir ',wine)
     }
 }
