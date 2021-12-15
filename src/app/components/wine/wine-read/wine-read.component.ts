@@ -35,16 +35,20 @@ export class WineReadComponent implements OnInit {
     filteredGenres: any;
     newFilters = []
 
+    showSpinner = false
+
     constructor(private wineService: WineService, private headerService: HeaderService) { }
 
     ngOnInit(): void {
+        this.showSpinner = true
         if (this.username == null) this.displayedColumns.pop()
         this.wineService.read().subscribe(wines => {
             this.wines = wines
             console.log(this.wines)
-            this.filters.map(filter => this._multiFilters(filter.type, filter.attribute, filter.control))
+            this.showSpinner = false
+            // this.filters.map(filter => this._multiFilters(filter.type, filter.attribute, filter.control))
         })
-        this.statusTable = true
+        // this.statusTable = true
     }
 
     transformImageUrl(imageUrl?: string): string {
@@ -99,5 +103,13 @@ export class WineReadComponent implements OnInit {
 
     openDialog(event: string) {
         this.wineService.openDialog(event)
+    }
+
+    dialogEditar(wine: Wine): void {
+        console.log('Editar ',wine)
+    }
+
+    dialogExcluir(wine: Wine): void {
+        console.log('Excluir ',wine)
     }
 }

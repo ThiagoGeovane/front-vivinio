@@ -104,7 +104,7 @@ registerLocaleData(localePt);
     ReactiveFormsModule,
     MatDividerModule,
     MatProgressBarModule,
-    MatTabsModule
+    MatTabsModule,
   ],
   providers: [
     {

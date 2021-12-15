@@ -7,6 +7,10 @@ form {
     transform: scale(1.02);
 }
 
+.example-spacer {
+    flex: 1 1 auto;
+}
+
 ::ng-deep .mat-card-header-text {
     margin: 18px 0 0 0 !important;
 }
@@ -50,11 +54,15 @@ table {
 }
 
 .edit {
-    margin-right: 10px;
+    margin-right: 50%;
+}
+
+.delete {
+    margin-right: 60%;
 }
 
 .edit>i {
-    color: #06d6a0;
+    color: #d9cd26;
 }
 
 .delete {

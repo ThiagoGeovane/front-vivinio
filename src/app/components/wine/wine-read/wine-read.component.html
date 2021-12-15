@@ -62,43 +62,20 @@
             <span class="preco-avista">{{ 10 | currency }} à vista</span> <br>
             <span class="preco-parcelado">{{ 100 | currency }} parcelado</span>
 
-
-            <!-- <mat-card-content class="card-content cursor-pointer" (click)="abrirModalDetalhes(wine)">
-                <div *ngIf="wine.imagens.length === 0; else elseImagens">
-                    <img class="card-image" src="../../../assets/img/dump3.png" alt="Dump">
-                </div>
-                <ng-template #elseImagens>
-                    <div *ngFor="let image of wine.imagens">
-                        <img *ngIf="image.destaque" class="card-image" [src]="transformImageUrl(image.url)"
-                            onerror="this.src='../../../assets/img/dump3.png'" alt="Photo: {{wine.id}}">
-                    </div>
-                </ng-template>
-                <span class="preco-avista">{{ wine.preco_avista | currency }} à vista</span>
-                <span class="preco-parcelado">{{ wine.preco_parcelado | currency }} parcelado</span>
-                <hr>
-            </mat-card-content>
-
-            <mat-card-actions class="card-actions">
-                <mat-slide-toggle class="col-md-3" #tooltip="matTooltip" matTooltip="Ativar / Desativar"
-                    matTooltipPosition="above" (change)="ativarDesativar(wine)" (click)="$event.stopPropagation()"
-                    [(ngModel)]="wine.ativo">
-                </mat-slide-toggle>
-                <div class="offset-md-4 col-md-5" style="text-align: end;">
-                    <a class="cursor-pointer edit" (click)="dialogEditar(wine)">
-                        <i class="material-icons" #tooltip="matTooltip" matTooltip="Editar exibição"
-                            matTooltipPosition="above">
+            <mat-card-actions>
+                <div style="padding-bottom: 15px;">
+                    <a class="cursor-pointer edit" routerLink="/wines/update/{{ wine.id }}">
+                        <i class="material-icons">
                             edit
                         </i>
                     </a>
-                    <a class="cursor-pointer delete" (click)="dialogExcluir(wine)">
-                        <i class="material-icons" #tooltip="matTooltip" matTooltip="Excluir exibição"
-                            matTooltipPosition="above">
+                    <a class="cursor-pointer delete" routerLink="/wines/delete/{{ wine.id }}">
+                        <i class="material-icons">
                             delete
                         </i>
                     </a>
                 </div>
-            </mat-card-actions> -->
-
+            </mat-card-actions>
         </mat-card>
     </div>
 </div>

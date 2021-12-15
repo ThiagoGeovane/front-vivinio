@@ -56,7 +56,6 @@ export class WineCreateComponent implements OnInit {
 
     createWine() {
         this.wine.user_id = JSON.parse(localStorage.getItem('currentUser')).id
-        console.log(this.wine)
         this.wineService.create(this.wine).subscribe(() => {
             this.wineService.showMessage('Vinho cadastrado com sucesso')
             this.router.navigate(['/wines'])
@@ -65,6 +64,19 @@ export class WineCreateComponent implements OnInit {
 
     cancel() {
         this.router.navigate(['/wines'])
+    }
+
+    validaForm(): boolean {
+        if (!this.wine.name 
+            || !this.wine.producer 
+            || !this.wine.country 
+            || !this.wine.type
+            || !this.wine.type_grape
+            || !this.wine.harmonizing
+            || !this.wine.image) {
+                return false
+            }
+        return true
     }
 
 }
