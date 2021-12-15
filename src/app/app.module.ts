@@ -49,7 +49,6 @@ import { UserDeleteComponent } from './components/user/user-delete/user-delete.c
 import { UserUpdateComponent } from './components/user/user-update/user-update.component';
 import { LoginComponent } from './login/login/login.component'; 
 import { TopRatedComponent } from './views/top-rated/top-rated.component';
-import { ConsolesComponent } from './views/consoles/consoles.component';
 import { AutenticacaoInterceptor } from './interceptors/autenticacao.interceptor';
 
 //Services globais
@@ -77,7 +76,6 @@ registerLocaleData(localePt);
     UserUpdateComponent,
     LoginComponent,
     TopRatedComponent,
-    ConsolesComponent,
   ],
   imports: [
     BrowserModule,

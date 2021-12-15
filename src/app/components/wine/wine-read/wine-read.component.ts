@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { environment } from './../../../../environments/environment';
 import { HeaderService } from './../../template/header/header.service';
 import { MatTableDataSource } from '@angular/material/table';
@@ -34,7 +35,11 @@ export class WineReadComponent implements OnInit {
     filteredGenres: any;
     newFilters = []
 
-    constructor(private wineService: WineService, private headerService: HeaderService) { }
+    constructor(
+        private wineService: WineService, 
+        private headerService: HeaderService,
+        private router: Router,
+    ) { }
 
     ngOnInit(): void {
         this.wineService.read().subscribe(wines => {
@@ -95,7 +100,7 @@ export class WineReadComponent implements OnInit {
         return localStorage.getItem('currentUser') ? JSON.parse(localStorage.getItem('currentUser')).id : null
     }
 
-    openDialog(event: string) {
-        this.wineService.openDialog(event)
+    navegarReview(wine: Wine): void {
+        this.router.navigate([`/top/${wine.id}`])
     }
 }

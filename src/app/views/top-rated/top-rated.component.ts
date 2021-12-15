@@ -10,13 +10,11 @@ import { Wine } from "src/app/models/wine.model";
   styleUrls: ['./top-rated.component.css']
 })
 export class TopRatedComponent implements OnInit {
-  options: any;
-  firstWine: Wine 
-  secondWine: Wine 
-  thirdWine: Wine 
-  plataforma: any
-  
-  constructor(private route: ActivatedRoute,private wineService: WineService, private headerService: HeaderService) { 
+  constructor(
+    private route: ActivatedRoute,
+    private wineService: WineService, 
+    private headerService: HeaderService
+  ) { 
     Object.assign(headerService.headerData, {
       title: 'Top wines',
       icon: 'star_border',
@@ -25,13 +23,6 @@ export class TopRatedComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.plataforma = this.route.snapshot.paramMap.get('plataforma')
-    this.wineService.wineByConsole(this.plataforma).subscribe(wines => {
-      
-      this.firstWine = wines[0] || null
-      this.secondWine = wines[1]  || null
-      this.thirdWine = wines[2] || null
-    })
   }
 
 }
