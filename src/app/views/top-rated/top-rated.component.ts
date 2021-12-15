@@ -33,6 +33,7 @@ export class TopRatedComponent implements OnInit {
   media: number;
   estrelasOn: number;
   estrelasOff: number;
+  isLogged: boolean;
 
   comentario: string;
   nota: number;
@@ -40,6 +41,7 @@ export class TopRatedComponent implements OnInit {
   ngOnInit(): void {
     this.showSpinner = true
     const id = +this.route.snapshot.paramMap.get('id')
+    this.isLogged = window.localStorage.getItem('token') ? true : false;
     
     this.wineService.readById(id).subscribe(wine => {
       this.wine = wine

@@ -59,7 +59,7 @@
 		<span class="container-wrapper">Não há reviews para este vinho</span>
 	</ng-template>
 
-	<mat-card class="mat-elevation-z8">
+	<mat-card *ngIf="isLogged" class="mat-elevation-z8">
 		<form>
 			<mat-form-field>
 				<mat-label>Comentário</mat-label>
