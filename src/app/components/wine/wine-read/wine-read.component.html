@@ -60,7 +60,7 @@
             <span class="preco-avista">{{ 10 | currency }} à vista</span> <br>
             <span class="preco-parcelado">{{ 100 | currency }} parcelado</span>
 
-            <mat-card-actions>
+            <mat-card-actions *ngIf="isLogged">
                 <div style="padding-bottom: 15px;">
                     <a class="cursor-pointer edit" routerLink="/wines/update/{{ wine.id }}">
                         <i class="material-icons">

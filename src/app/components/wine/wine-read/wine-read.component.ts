@@ -35,6 +35,8 @@ export class WineReadComponent implements OnInit {
     filteredGenres: any;
     newFilters = []
 
+    isLogged = false;
+
     constructor(
         private wineService: WineService, 
         private headerService: HeaderService,
@@ -42,6 +44,8 @@ export class WineReadComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+        this.isLogged = window.localStorage.getItem('token') ? true : false;
+
         this.wineService.read().subscribe(wines => {
             this.wines = wines
             console.log(this.wines)
