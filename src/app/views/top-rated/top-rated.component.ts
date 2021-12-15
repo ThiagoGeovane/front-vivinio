@@ -32,6 +32,8 @@ export class TopRatedComponent implements OnInit {
   estrelasOn: number;
   estrelasOff: number;
 
+  comentario: string;
+
   ngOnInit(): void {
     this.showSpinner = true
     const id = +this.route.snapshot.paramMap.get('id')

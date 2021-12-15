@@ -3,8 +3,9 @@
 	<div class="header-button">
 		<div>
 			<b>
-				{{ wine.name }} -> {{ media.toFixed(2) }}
+				{{ wine.name }}
 			</b>
+			-> nota {{ media ? media.toFixed(2) : '--' }}
 		</div>
 
 		<button mat-raised-button (click)="voltar()">
@@ -20,8 +21,8 @@
 		<div class="flex-item-second">
 			<h3><b>Produtor: </b> {{ wine.producer ? wine.producer : '--' }}</h3>
 			<h3><b>País: </b> {{ wine.country ? wine.country : '--' }}</h3>
-			<h3><b>Descrição: </b> {{ wine.description ? wine.description : wine.name }}</h3>
-			<h3 class="avaliacao-container">
+			<h3><b>Descrição: </b> {{ wine.description ? wine.description : '--' }}</h3>
+			<h3 *ngIf="wine.reviews.length" class="avaliacao-container">
 				<b>Média de avaliações: </b>
 				<div *ngFor="let item of [].constructor(estrelasOn); let i = index;">
 					<img class="estrela-item" src="../../../assets/img/star_on.gif" alt="acesas">
@@ -34,22 +35,36 @@
 		<div class="flex-item-terc">
 			<h3><b>Tipo de vinho: </b> {{ wine.type ? wine.type : '--' }}</h3>
 			<h3><b>Tipo de uva: </b> {{ wine.type_grape ? wine.type_grape : '--' }}</h3>
-			<h3><b>Harmonização: </b> {{ wine.harmonizing ? wine.harmonizing : wine.name }}</h3>
+			<h3><b>Harmonização: </b> {{ wine.harmonizing ? wine.harmonizing : '--' }}</h3>
 		</div>
 	</div>
 
-	<mat-list *ngFor="let review of wine.reviews">
-		<mat-list-item>
-			{{ review.review }}
-			<h3 class="avaliacao-container-2">
-				<div *ngFor="let item of [].constructor(+(review.evaluation.toFixed(0))); let i = index;">
-					<img class="estrela-item" src="../../../assets/img/star_on.gif" alt="acesas">
-				</div>
-				<div *ngFor="let item of [].constructor(5 - (+(review.evaluation.toFixed(0)))); let i = index;">
-					<img class="estrela-item" src="../../../assets/img/star_off.gif" alt="apagadas">
-				</div>
-			</h3>
-		</mat-list-item>
-		<mat-divider></mat-divider>
-	</mat-list>
+	<div *ngIf="wine.reviews.length > 0; else notReviews">
+		<mat-list *ngFor="let review of wine.reviews">
+			<mat-list-item>
+				{{ review.review }}
+				<h3 class="avaliacao-container-2">
+					<div *ngFor="let item of [].constructor(+(review.evaluation.toFixed(0))); let i = index;">
+						<img class="estrela-item" src="../../../assets/img/star_on.gif" alt="acesas">
+					</div>
+					<div *ngFor="let item of [].constructor(5 - (+(review.evaluation.toFixed(0)))); let i = index;">
+						<img class="estrela-item" src="../../../assets/img/star_off.gif" alt="apagadas">
+					</div>
+				</h3>
+			</mat-list-item>
+			<mat-divider></mat-divider>
+		</mat-list>
+	</div>
+	<ng-template #notReviews>
+		<span class="container-wrapper">Não há reviews para este vinho</span>
+	</ng-template>
+
+	<!-- <mat-card class="mat-elevation-z8">
+		<form>
+			<mat-form-field appearance="fill">
+				<mat-label>Comentário</mat-label>
+				<textarea [(ngModel)]="comentario" matInput name="comentario"></textarea>
+			</mat-form-field>
+		</form>
+	</mat-card> -->
 </ng-template>
