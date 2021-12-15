@@ -1,3 +1,4 @@
+import { ReviewService } from './../../services/review.service';
 import { environment } from './../../../environments/environment';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
@@ -18,6 +19,7 @@ export class TopRatedComponent implements OnInit {
     private wineService: WineService, 
     private headerService: HeaderService,
     private router: Router,
+    private reviewService: ReviewService,
   ) { 
     Object.assign(headerService.headerData, {
       title: 'Top wines',
@@ -33,6 +35,7 @@ export class TopRatedComponent implements OnInit {
   estrelasOff: number;
 
   comentario: string;
+  nota: number;
 
   ngOnInit(): void {
     this.showSpinner = true
@@ -45,7 +48,7 @@ export class TopRatedComponent implements OnInit {
       this.estrelasOn = +(this.media.toFixed(0))
       this.estrelasOff = 5 - this.estrelasOn    
 
-      console.log(this.estrelasOn, this.estrelasOff)
+      console.log(this.wine)
       
       this.showSpinner = false
     });
@@ -65,5 +68,16 @@ export class TopRatedComponent implements OnInit {
 
   voltar(): void {
     this.router.navigate(['/wines'])
+  }
+
+  createReview() {
+    console.log(this.comentario, this.nota)
+    const review = { wine_id: this.wine.id, review: this.comentario, evaluation: this.nota }
+    this.reviewService.create(review).subscribe(() => {
+      this.reviewService.showMessage('Review cadastrado com sucesso')
+      this.comentario = null
+      this.nota = null
+      this.ngOnInit()
+    })
   }
 }
