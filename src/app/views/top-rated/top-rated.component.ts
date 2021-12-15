@@ -28,15 +28,33 @@ export class TopRatedComponent implements OnInit {
 
   wine: Wine;
   showSpinner = false
+  media: number;
+  estrelasOn: number;
+  estrelasOff: number;
 
   ngOnInit(): void {
     this.showSpinner = true
     const id = +this.route.snapshot.paramMap.get('id')
+    
     this.wineService.readById(id).subscribe(wine => {
       this.wine = wine
+      this.media = this.fazerMedia(wine);
+      
+      this.estrelasOn = +(this.media.toFixed(0))
+      this.estrelasOff = 5 - this.estrelasOn    
+
+      console.log(this.estrelasOn, this.estrelasOff)
+      
       this.showSpinner = false
-      console.log(this.wine);
     });
+  }
+
+  fazerMedia(wine: Wine): number {
+    let soma = 0
+    wine.reviews.forEach((item, index) => {
+      soma += item.evaluation
+    })
+    return (soma/wine.reviews.length)
   }
 
   transformImageUrl(imageUrl?: string): string {
@@ -46,5 +64,4 @@ export class TopRatedComponent implements OnInit {
   voltar(): void {
     this.router.navigate(['/wines'])
   }
-
 }

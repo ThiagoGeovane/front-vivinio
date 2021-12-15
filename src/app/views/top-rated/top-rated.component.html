@@ -1,26 +1,35 @@
 <mat-spinner *ngIf="showSpinner; else notSpinner"></mat-spinner>
 <ng-template #notSpinner>
 	<div class="header-button">
-		<h1><b>{{ wine.name }}</b></h1>
+		<div>
+			<b>
+				{{ wine.name }} -> {{ media.toFixed(2) }}
+			</b>
+		</div>
 
 		<button mat-raised-button (click)="voltar()">
 			Voltar
 		</button>
 	</div>
 
-	<!-- <div class="container-wrapper">
-		<h1><b>{{ wine.name }}</b></h1>
-	</div> -->
-
 	<div class="flex-container">
 		<div class="flex-item-first">
-			<img style="object-fit: cover;" [src]="transformImageUrl(wine.image_url)"
+			<img class="image-vinho" [src]="transformImageUrl(wine.image_url)"
 				onerror="this.src='../../../assets/img/dump3.png'" alt="Imagens de produtos">
 		</div>
 		<div class="flex-item-second">
 			<h3><b>Produtor: </b> {{ wine.producer ? wine.producer : '--' }}</h3>
 			<h3><b>País: </b> {{ wine.country ? wine.country : '--' }}</h3>
 			<h3><b>Descrição: </b> {{ wine.description ? wine.description : wine.name }}</h3>
+			<h3 class="avaliacao-container">
+				<b>Média de avaliações: </b>
+				<div *ngFor="let item of [].constructor(estrelasOn); let i = index;">
+					<img class="estrela-item" src="../../../assets/img/star_on.gif" alt="acesas">
+				</div>
+				<div *ngFor="let item of [].constructor(estrelasOff); let i = index;">
+					<img class="estrela-item" src="../../../assets/img/star_off.gif" alt="apagadas">
+				</div>
+			</h3>
 		</div>
 		<div class="flex-item-terc">
 			<h3><b>Tipo de vinho: </b> {{ wine.type ? wine.type : '--' }}</h3>
@@ -30,7 +39,17 @@
 	</div>
 
 	<mat-list *ngFor="let review of wine.reviews">
-		<mat-list-item>{{ review.review }}</mat-list-item>
+		<mat-list-item>
+			{{ review.review }}
+			<h3 class="avaliacao-container-2">
+				<div *ngFor="let item of [].constructor(+(review.evaluation.toFixed(0))); let i = index;">
+					<img class="estrela-item" src="../../../assets/img/star_on.gif" alt="acesas">
+				</div>
+				<div *ngFor="let item of [].constructor(5 - (+(review.evaluation.toFixed(0)))); let i = index;">
+					<img class="estrela-item" src="../../../assets/img/star_off.gif" alt="apagadas">
+				</div>
+			</h3>
+		</mat-list-item>
 		<mat-divider></mat-divider>
 	</mat-list>
 </ng-template>
